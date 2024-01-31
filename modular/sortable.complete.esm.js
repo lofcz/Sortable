@@ -1076,6 +1076,12 @@ function Sortable(el, options) {
   }
   this.el = el; // root element
   this.options = options = _extends({}, options);
+  if (this.options.fallbackOnBody) {
+    // backwards compatibility
+    this.options.getFallbackParent = function () {
+      return document.body;
+    };
+  }
 
   // Export instance
   el[expando] = this;
@@ -1115,6 +1121,7 @@ function Sortable(el, options) {
     touchStartThreshold: (Number.parseInt ? Number : window).parseInt(window.devicePixelRatio, 10) || 1,
     forceFallback: false,
     fallbackClass: 'sortable-fallback',
+    getFallbackParent: null,
     fallbackOnBody: false,
     fallbackTolerance: 0,
     fallbackOffset: {
@@ -1516,7 +1523,8 @@ Sortable.prototype = /** @lends Sortable.prototype */{
     // Bug if using scale(): https://stackoverflow.com/questions/2637058
     // Not being adjusted for
     if (!ghostEl) {
-      var container = this.options.fallbackOnBody ? document.body : rootEl,
+      var fallbackParent = typeof this.options.getFallbackParent === 'function' ? this.options.getFallbackParent() : null;
+      var container = fallbackParent !== null && fallbackParent !== void 0 ? fallbackParent : rootEl,
         rect = getRect(dragEl, true, PositionGhostAbsolutely, true, container),
         options = this.options;
 
