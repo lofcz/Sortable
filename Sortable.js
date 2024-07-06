@@ -1474,7 +1474,7 @@
             }
             target = parent; // store last element
           }
-          /* jshint boss:true */ while (parent = parent.parentNode);
+          /* jshint boss:true */ while (parent = getParentOrHost(parent));
         }
         _unhideGhostForTarget();
       }
@@ -2381,7 +2381,8 @@
     nextTick: _nextTick,
     cancelNextTick: _cancelNextTick,
     detectDirection: _detectDirection,
-    getChild: getChild
+    getChild: getChild,
+    expando: expando
   };
 
   /**
