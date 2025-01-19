@@ -1,134 +1,116 @@
 /**!
- * Sortable 1.15.6
+ * Sortable 1.15.7
  * @author	RubaXa   <trash@rubaxa.org>
  * @author	owenm    <owen23355@gmail.com>
  * @license MIT
  */
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) {
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    }
-    keys.push.apply(keys, symbols);
-  }
-  return keys;
+function _arrayLikeToArray(r, a) {
+  (null == a || a > r.length) && (a = r.length);
+  for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+  return n;
 }
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-  return target;
+function _arrayWithoutHoles(r) {
+  if (Array.isArray(r)) return _arrayLikeToArray(r);
 }
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-  return _typeof(obj);
-}
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
+function _defineProperty(e, r, t) {
+  return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+    value: t,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[r] = t, e;
 }
 function _extends() {
-  _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+  return _extends = Object.assign ? Object.assign.bind() : function (n) {
+    for (var e = 1; e < arguments.length; e++) {
+      var t = arguments[e];
+      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
     }
-    return target;
-  };
-  return _extends.apply(this, arguments);
+    return n;
+  }, _extends.apply(null, arguments);
 }
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-  return target;
-}
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = _objectWithoutPropertiesLoose(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-  return target;
-}
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
+function _iterableToArray(r) {
+  if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
 }
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
+function ownKeys(e, r) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r && (o = o.filter(function (r) {
+      return Object.getOwnPropertyDescriptor(e, r).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread2(e) {
+  for (var r = 1; r < arguments.length; r++) {
+    var t = null != arguments[r] ? arguments[r] : {};
+    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+      _defineProperty(e, r, t[r]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+    });
+  }
+  return e;
+}
+function _objectWithoutProperties(e, t) {
+  if (null == e) return {};
+  var o,
+    r,
+    i = _objectWithoutPropertiesLoose(e, t);
+  if (Object.getOwnPropertySymbols) {
+    var s = Object.getOwnPropertySymbols(e);
+    for (r = 0; r < s.length; r++) o = s[r], t.includes(o) || {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
+  }
+  return i;
+}
+function _objectWithoutPropertiesLoose(r, e) {
+  if (null == r) return {};
+  var t = {};
+  for (var n in r) if ({}.hasOwnProperty.call(r, n)) {
+    if (e.includes(n)) continue;
+    t[n] = r[n];
+  }
+  return t;
+}
+function _toConsumableArray(r) {
+  return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
+}
+function _toPrimitive(t, r) {
+  if ("object" != typeof t || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != typeof i) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, "string");
+  return "symbol" == typeof i ? i : i + "";
+}
+function _typeof(o) {
+  "@babel/helpers - typeof";
 
-var version = "1.15.6";
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, _typeof(o);
+}
+function _unsupportedIterableToArray(r, a) {
+  if (r) {
+    if ("string" == typeof r) return _arrayLikeToArray(r, a);
+    var t = {}.toString.call(r).slice(8, -1);
+    return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
+  }
+}
+
+var version = "1.15.7";
 
 function userAgent(pattern) {
   if (typeof window !== 'undefined' && window.navigator) {
@@ -152,7 +134,7 @@ function on(el, event, fn) {
 function off(el, event, fn) {
   el.removeEventListener(event, fn, !IE11OrLess && captureMode);
 }
-function matches( /**HTMLElement*/el, /**String*/selector) {
+function matches(/**HTMLElement*/el, /**String*/selector) {
   if (!selector) return;
   selector[0] === '>' && (selector = selector.substring(1));
   if (el) {
@@ -173,7 +155,7 @@ function matches( /**HTMLElement*/el, /**String*/selector) {
 function getParentOrHost(el) {
   return el.host && el !== document && el.host.nodeType ? el.host : el.parentNode;
 }
-function closest( /**HTMLElement*/el, /**String*/selector, /**HTMLElement*/ctx, includeCTX) {
+function closest(/**HTMLElement*/el, /**String*/selector, /**HTMLElement*/ctx, includeCTX) {
   if (el) {
     ctx = ctx || document;
     do {
@@ -1061,7 +1043,7 @@ var nearestEmptyInsertDetectEvent = function nearestEmptyInsertDetectEvent(evt) 
 };
 var _checkOutsideTargetEl = function _checkOutsideTargetEl(evt) {
   if (dragEl) {
-    dragEl.parentNode[expando]._isOutsideThisEl(evt.target);
+    dragEl.parentNode && dragEl.parentNode[expando]._isOutsideThisEl(evt.target);
   }
 };
 
@@ -1183,7 +1165,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
   _getDirection: function _getDirection(evt, target) {
     return typeof this.options.direction === 'function' ? this.options.direction.call(this, evt, target, dragEl) : this.options.direction;
   },
-  _onTapStart: function _onTapStart( /** Event|TouchEvent */evt) {
+  _onTapStart: function _onTapStart(/** Event|TouchEvent */evt) {
     if (!evt.cancelable) return;
     var _this = this,
       el = this.el,
@@ -1273,7 +1255,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
     // Prepare `dragstart`
     this._prepareDragStart(evt, touch, target);
   },
-  _prepareDragStart: function _prepareDragStart( /** Event */evt, /** Touch */touch, /** HTMLElement */target) {
+  _prepareDragStart: function _prepareDragStart(/** Event */evt, /** Touch */touch, /** HTMLElement */target) {
     var _this = this,
       el = _this.el,
       options = _this.options,
@@ -1379,7 +1361,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
       }
     }
   },
-  _delayedDragTouchMoveHandler: function _delayedDragTouchMoveHandler( /** TouchEvent|PointerEvent **/e) {
+  _delayedDragTouchMoveHandler: function _delayedDragTouchMoveHandler(/** TouchEvent|PointerEvent **/e) {
     var touch = e.touches ? e.touches[0] : e;
     if (Math.max(Math.abs(touch.clientX - this._lastX), Math.abs(touch.clientY - this._lastY)) >= Math.floor(this.options.touchStartThreshold / (this.nativeDraggable && window.devicePixelRatio || 1))) {
       this._disableDelayedDrag();
@@ -1401,7 +1383,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
     off(ownerDocument, 'touchmove', this._delayedDragTouchMoveHandler);
     off(ownerDocument, 'pointermove', this._delayedDragTouchMoveHandler);
   },
-  _triggerDragStart: function _triggerDragStart( /** Event */evt, /** Touch */touch) {
+  _triggerDragStart: function _triggerDragStart(/** Event */evt, /** Touch */touch) {
     touch = touch || evt.pointerType == 'touch' && evt;
     if (!this.nativeDraggable || touch) {
       if (this.options.supportPointer) {
@@ -1464,7 +1446,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
         if (target === parent) break;
         parent = target;
       }
-      dragEl.parentNode[expando]._isOutsideThisEl(target);
+      dragEl.parentNode && dragEl.parentNode[expando]._isOutsideThisEl(target);
       if (parent) {
         do {
           if (parent[expando]) {
@@ -1486,7 +1468,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
       _unhideGhostForTarget();
     }
   },
-  _onTouchMove: function _onTouchMove( /**TouchEvent*/evt) {
+  _onTouchMove: function _onTouchMove(/**TouchEvent*/evt) {
     if (tapEvt) {
       var options = this.options,
         fallbackTolerance = options.fallbackTolerance,
@@ -1580,7 +1562,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
       css(ghostEl, 'transform-origin', tapDistanceLeft / parseInt(ghostEl.style.width) * 100 + '% ' + tapDistanceTop / parseInt(ghostEl.style.height) * 100 + '%');
     }
   },
-  _onDragStart: function _onDragStart( /**Event*/evt, /**boolean*/fallback) {
+  _onDragStart: function _onDragStart(/**Event*/evt, /**boolean*/fallback) {
     var _this = this;
     var dataTransfer = evt.dataTransfer;
     var options = _this.options;
@@ -1645,7 +1627,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
     }
   },
   // Returns true - if no further action is needed (either inserted or another condition)
-  _onDragOver: function _onDragOver( /**Event*/evt) {
+  _onDragOver: function _onDragOver(/**Event*/evt) {
     var el = this.el,
       target = evt.target,
       dragRect,
@@ -1733,7 +1715,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
 
       // no bubbling and not fallback
       if (!options.dragoverBubble && !evt.rootEl && target !== document) {
-        dragEl.parentNode[expando]._isOutsideThisEl(evt.target);
+        dragEl.parentNode && dragEl.parentNode[expando]._isOutsideThisEl(evt.target);
 
         // Do not detect for empty insert if already inserted
         !insertion && nearestEmptyInsertDetectEvent(evt);
@@ -1894,6 +1876,13 @@ Sortable.prototype = /** @lends Sortable.prototype */{
       if (el.contains(dragEl)) {
         return completed(false);
       }
+    } else {
+      // unmounted dragEl from previous target who is dragging over a new target but can not be dropped
+      if (putSortable && putSortable.lastPutMode !== 'clone') {
+        rootEl.appendChild(dragEl);
+      } else if (rootEl !== dragEl.parentNode) {
+        dragEl.parentNode && dragEl.parentNode.removeChild(dragEl);
+      }
     }
     return false;
   },
@@ -1915,7 +1904,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
     off(ownerDocument, 'touchcancel', this._onDrop);
     off(document, 'selectstart', this);
   },
-  _onDrop: function _onDrop( /**Event*/evt) {
+  _onDrop: function _onDrop(/**Event*/evt) {
     var el = this.el,
       options = this.options;
 
@@ -2068,7 +2057,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
     });
     savedInputChecked.length = lastDx = lastDy = 0;
   },
-  handleEvent: function handleEvent( /**Event*/evt) {
+  handleEvent: function handleEvent(/**Event*/evt) {
     switch (evt.type) {
       case 'drop':
       case 'dragend':
@@ -2224,7 +2213,7 @@ Sortable.prototype = /** @lends Sortable.prototype */{
     }
   }
 };
-function _globalDragOver( /**Event*/evt) {
+function _globalDragOver(/**Event*/evt) {
   if (evt.dataTransfer) {
     evt.dataTransfer.dropEffect = 'move';
   }
@@ -3017,7 +3006,10 @@ function MultiDragPlugin() {
 
             // Move element(s) to end of parentEl so that it does not interfere with multi-drag clones insertion if they are inserted
             // while folding, and so that we can capture them again because old sortable will no longer be fromSortable
-            parentEl.appendChild(multiDragElement);
+            if (!multiDragElement.contains(parentEl)) {
+              // multiDragElement can't contains parentEl
+              parentEl.appendChild(multiDragElement);
+            }
           });
           folding = true;
         }
@@ -3103,38 +3095,36 @@ function MultiDragPlugin() {
             var lastIndex = index(lastMultiDragSelect),
               currentIndex = index(dragEl$1);
             if (~lastIndex && ~currentIndex && lastIndex !== currentIndex) {
-              (function () {
-                // Must include lastMultiDragSelect (select it), in case modified selection from no selection
-                // (but previous selection existed)
-                var n, i;
-                if (currentIndex > lastIndex) {
-                  i = lastIndex;
-                  n = currentIndex;
-                } else {
-                  i = currentIndex;
-                  n = lastIndex + 1;
-                }
-                var filter = options.filter;
-                for (; i < n; i++) {
-                  if (~multiDragElements.indexOf(children[i])) continue;
-                  // Check if element is draggable
-                  if (!closest(children[i], options.draggable, parentEl, false)) continue;
-                  // Check if element is filtered
-                  var filtered = filter && (typeof filter === 'function' ? filter.call(sortable, evt, children[i], sortable) : filter.split(',').some(function (criteria) {
-                    return closest(children[i], criteria.trim(), parentEl, false);
-                  }));
-                  if (filtered) continue;
-                  toggleClass(children[i], options.selectedClass, true);
-                  multiDragElements.push(children[i]);
-                  dispatchEvent({
-                    sortable: sortable,
-                    rootEl: rootEl,
-                    name: 'select',
-                    targetEl: children[i],
-                    originalEvent: evt
-                  });
-                }
-              })();
+              // Must include lastMultiDragSelect (select it), in case modified selection from no selection
+              // (but previous selection existed)
+              var n, i;
+              if (currentIndex > lastIndex) {
+                i = lastIndex;
+                n = currentIndex;
+              } else {
+                i = currentIndex;
+                n = lastIndex + 1;
+              }
+              var filter = options.filter;
+              for (; i < n; i++) {
+                if (~multiDragElements.indexOf(children[i])) continue;
+                // Check if element is draggable
+                if (!closest(children[i], options.draggable, parentEl, false)) continue;
+                // Check if element is filtered
+                var filtered = filter && (typeof filter === 'function' ? filter.call(sortable, evt, children[i], sortable) : filter.split(',').some(function (criteria) {
+                  return closest(children[i], criteria.trim(), parentEl, false);
+                }));
+                if (filtered) continue;
+                toggleClass(children[i], options.selectedClass, true);
+                multiDragElements.push(children[i]);
+                dispatchEvent({
+                  sortable: sortable,
+                  rootEl: rootEl,
+                  name: 'select',
+                  targetEl: children[i],
+                  originalEvent: evt
+                });
+              }
             }
           } else {
             lastMultiDragSelect = dragEl$1;
@@ -3187,7 +3177,10 @@ function MultiDragPlugin() {
               if (children[multiDragIndex]) {
                 parentEl.insertBefore(multiDragElement, children[multiDragIndex]);
               } else {
-                parentEl.appendChild(multiDragElement);
+                if (!multiDragElement.contains(parentEl)) {
+                  // multiDragElement can't contains parentEl
+                  parentEl.appendChild(multiDragElement);
+                }
               }
               multiDragIndex++;
             });
