@@ -399,7 +399,8 @@ function Sortable(el, options) {
 		fallbackOnBody: false,
 		fallbackTolerance: 0,
 		fallbackOffset: {x: 0, y: 0},
-		supportPointer: Sortable.supportPointer !== false && ('PointerEvent' in window) && !Safari,
+		// Disabled on Safari: #1571; Enabled on Safari IOS: #2244
+		supportPointer: Sortable.supportPointer !== false && ('PointerEvent' in window) && (!Safari || IOS),
 		emptyInsertThreshold: 5
 	};
 
@@ -524,7 +525,7 @@ Sortable.prototype = /** @lends Sortable.prototype */ {
 					fromEl: el
 				});
 				pluginEvent('filter', _this, { evt });
-				preventOnFilter && evt.cancelable && evt.preventDefault();
+				preventOnFilter && evt.preventDefault();
 				return; // cancel dnd
 			}
 		}
@@ -547,7 +548,7 @@ Sortable.prototype = /** @lends Sortable.prototype */ {
 			});
 
 			if (filter) {
-				preventOnFilter && evt.cancelable && evt.preventDefault();
+				preventOnFilter && evt.preventDefault();
 				return; // cancel dnd
 			}
 		}
@@ -629,9 +630,15 @@ Sortable.prototype = /** @lends Sortable.prototype */ {
 			on(ownerDocument, 'mousemove', nearestEmptyInsertDetectEvent);
 			on(ownerDocument, 'touchmove', nearestEmptyInsertDetectEvent);
 
-			on(ownerDocument, 'mouseup', _this._onDrop);
-			on(ownerDocument, 'touchend', _this._onDrop);
-			on(ownerDocument, 'touchcancel', _this._onDrop);
+			if (options.supportPointer) {
+				on(ownerDocument, 'pointerup', _this._onDrop);
+				// Native D&D triggers pointercancel
+				!this.nativeDraggable && on(ownerDocument, 'pointercancel', _this._onDrop);
+			} else {
+				on(ownerDocument, 'mouseup', _this._onDrop);
+				on(ownerDocument, 'touchend', _this._onDrop);
+				on(ownerDocument, 'touchcancel', _this._onDrop);
+			}
 
 			// Make dragEl draggable (must be before delay for FireFox)
 			if (FireFox && this.nativeDraggable) {
@@ -650,9 +657,14 @@ Sortable.prototype = /** @lends Sortable.prototype */ {
 				// If the user moves the pointer or let go the click or touch
 				// before the delay has been reached:
 				// disable the delayed drag
-				on(ownerDocument, 'mouseup', _this._disableDelayedDrag);
-				on(ownerDocument, 'touchend', _this._disableDelayedDrag);
-				on(ownerDocument, 'touchcancel', _this._disableDelayedDrag);
+				if (options.supportPointer) {
+					on(ownerDocument, 'pointerup', _this._disableDelayedDrag);
+					on(ownerDocument, 'pointercancel', _this._disableDelayedDrag);
+				} else {
+					on(ownerDocument, 'mouseup', _this._disableDelayedDrag);
+					on(ownerDocument, 'touchend', _this._disableDelayedDrag);
+					on(ownerDocument, 'touchcancel', _this._disableDelayedDrag);
+				}
 				on(ownerDocument, 'mousemove', _this._delayedDragTouchMoveHandler);
 				on(ownerDocument, 'touchmove', _this._delayedDragTouchMoveHandler);
 				options.supportPointer && on(ownerDocument, 'pointermove', _this._delayedDragTouchMoveHandler);
@@ -685,6 +697,8 @@ Sortable.prototype = /** @lends Sortable.prototype */ {
 		off(ownerDocument, 'mouseup', this._disableDelayedDrag);
 		off(ownerDocument, 'touchend', this._disableDelayedDrag);
 		off(ownerDocument, 'touchcancel', this._disableDelayedDrag);
+		off(ownerDocument, 'pointerup', this._disableDelayedDrag);
+		off(ownerDocument, 'pointercancel', this._disableDelayedDrag);
 		off(ownerDocument, 'mousemove', this._delayedDragTouchMoveHandler);
 		off(ownerDocument, 'touchmove', this._delayedDragTouchMoveHandler);
 		off(ownerDocument, 'pointermove', this._delayedDragTouchMoveHandler);
@@ -707,9 +721,9 @@ Sortable.prototype = /** @lends Sortable.prototype */ {
 		}
 
 		try {
+			
 			if (document.selection) {
-				// Timeout neccessary for IE9
-				_nextTick(function () {
+				_nextTick(() => {
 					document.selection.empty();
 				});
 			} else {
@@ -989,6 +1003,8 @@ Sortable.prototype = /** @lends Sortable.prototype */ {
 		on(document, 'selectstart', _this);
 
 		moved = true;
+
+		window.getSelection().removeAllRanges();
 
 		if (Safari) {
 			css(document.body, 'user-select', 'none');
@@ -1339,6 +1355,7 @@ Sortable.prototype = /** @lends Sortable.prototype */ {
 		off(ownerDocument, 'mouseup', this._onDrop);
 		off(ownerDocument, 'touchend', this._onDrop);
 		off(ownerDocument, 'pointerup', this._onDrop);
+		off(ownerDocument, 'pointercancel', this._onDrop);
 		off(ownerDocument, 'touchcancel', this._onDrop);
 		off(document, 'selectstart', this);
 	},
