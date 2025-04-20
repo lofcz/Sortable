@@ -159,7 +159,7 @@
     return false;
   }
   function getParentOrHost(el) {
-    return el.host && el !== document && el.host.nodeType ? el.host : el.parentNode;
+    return el.host && el !== document && el.host.nodeType && el.host !== el ? el.host : el.parentNode;
   }
   function closest(/**HTMLElement*/el, /**String*/selector, /**HTMLElement*/ctx, includeCTX) {
     if (el) {
@@ -1977,8 +1977,8 @@
             sortable: this,
             name: 'unchoose',
             toEl: parentEl,
-            newIndex: null,
-            newDraggableIndex: null,
+            newIndex: newIndex,
+            newDraggableIndex: newDraggableIndex,
             originalEvent: evt
           });
           if (rootEl !== parentEl) {
